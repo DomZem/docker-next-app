@@ -1,8 +1,13 @@
-FROM node:18
+FROM node
 
 WORKDIR /app
-COPY package*.json ./
+
+COPY package.json /app
+
 RUN npm install
-COPY . .
+
+COPY . /app
+
 EXPOSE 3000
+
 CMD npm run dev

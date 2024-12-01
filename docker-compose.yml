@@ -1,0 +1,31 @@
+version: '3'
+services:
+  postgres-db:
+    image: postgres
+    container_name: postgres-db
+     environment:
+      - POSTGRES_USER=dominik
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=dominik-db
+    ports:
+      - "5432:5432"
+    networks:
+      - my-network
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  my-app: 
+    image: .
+    container_name: my-app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres-db
+    networks:
+      - my-network
+  
+networks:
+  my-network:
+
+volumes:
+  postgres-data:
